@@ -1,0 +1,27 @@
+// http://192.168.1.25:26121/wts/informacion
+{
+    "Compilacion": "Mar 31 2020 - 02:18:27",
+    "Computadora": "SRVCASA",
+    "Directorio_Actual": "C:\\Apps\\AgenteBalanceador",
+    "Ejecutable": "C:\\Apps\\AgenteBalanceador\\agenteBalanceador.exe",
+    "Fecha": "31 MAR 2020 14:41:42",
+    "Memoria": {
+        "Carga": 20,
+        "DisponibleFisica": 851472384,
+        "DisponiblePageFile": 2469502976,
+        "DisponibleVirtual": 2112057344,
+        "TotalFisica": 1073037312,
+        "TotalPageFile": 2589855744,
+        "TotalVirtual": 2147352576
+    },
+    "OS": "Windows Server 2003 R2, 32bits, Compilacion 3790",
+    "Unidades": [
+        {
+        "Libre": 36329156608,
+        "Total": 42939584512,
+        "Unidad": "C:\\"
+        }
+    ],
+    "Usuario": "SYSTEM",
+    "Version": "20200331021827"
+}

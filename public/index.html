@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+    <!--Custom css -->
+    <link type="text/css" rel="stylesheet" href="css/custom.css"  media="screen,projection"/>
+
+    <title>Visor de Terminal Servers</title>
+</head>
+<body>
+
+    <div class="container">
+        <nav>
+            <div class="nav-wrapper">
+              <a href="#/" class="brand-logo left medium"><i class="material-icons medium left">home</i></a>
+              <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    
+              <ul class="right hide-on-med-and-down">
+                <li><a href="#/servidores"><i class="material-icons left">storage</i>Servidores</a></li>
+                <li><a href="#/usuarios"><i class="material-icons left">face</i>Usuarios</a></li>
+                <li><a href="#/buscar"><i class="material-icons left">search</i>Buscar</a></li>
+              </ul>
+            </div>
+        </nav>
+
+        <ul class="sidenav" id="mobile-demo">
+            <li><a class="sidenav-close" href="#/servidores"><i class="material-icons left">storage</i>Servidores</a></li>
+            <li><a class="sidenav-close" href="#/usuarios"><i class="material-icons left">face</i>Usuarios</a></li>
+            <li><a class="sidenav-close" href="#/buscar"><i class="material-icons left">search</i>Buscar</a></li>
+        </ul>
+
+        <div id="main"></div>
+    </div>
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script type="text/javascript" src="js/signals.js"></script>
+    <script type="text/javascript" src="js/crossroads.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+
+            let elems = document.querySelectorAll('.sidenav')
+            let instancesaaa = M.Sidenav.init(elems, {draggable: false, edge: 'left'})
+
+    });
+
+    crossroads.addRoute('#/', function () {
+        load('main', 'partials/resumen.html')
+
+        resumen()
+    })
+
+    crossroads.addRoute('#/servidores', function () {
+        load('main', 'partials/servidores.html', function() {
+
+            M.AutoInit();
+
+            let elemssss = document.querySelectorAll('.collapsible .popout')
+            let instances = M.Collapsible.init(elemssss, {acordeon: false, onOpenStart: hola()})
+
+           cargarServidores()
+        })
+    })
+
+    crossroads.addRoute('#/usuarios', function () {
+        load('main', 'partials/usuarios.html', function() {
+
+            M.AutoInit();
+
+            let elem = document.querySelectorAll('.collapsible .popout')
+            let instances = M.Collapsible.init(elem, {acordeon: false})
+
+            cargarUsuarios()
+        })
+    })
+
+    crossroads.addRoute('#/buscar', function () {
+        load('main', 'partials/buscar.html')
+    })
+
+    // otra forma de escuchar cambios en el #
+    window.addEventListener('hashchange', function() { crossroads.parse(window.location.hash) })
+
+    crossroads.parse(window.location.hash)
+
+    </script>
+</body>
+</html>
