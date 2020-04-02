@@ -71,6 +71,8 @@ router.get('/usuariosxservidor', function(req, res, next) {
 
     // Pimero recorro los servidores
     for (let i = 0; i< data.length;i++) {
+
+      if (!data[i].sesiones) continue
       
       for (let j = 0; j < data[i].sesiones.length;j++) {
         let obj = {}
@@ -78,6 +80,8 @@ router.get('/usuariosxservidor', function(req, res, next) {
         obj.userName=data[i].sesiones[j].username
         obj.serverName=data[i].Computadora
         obj.procesos = []
+
+        if (!data[i].procesos) continue
 
         for (let x=0;x<data[i].procesos.length;x++) {
           if (obj.userName.toUpperCase() === data[i].procesos[x].username.toUpperCase()) {
@@ -101,13 +105,15 @@ router.get('/sesionesxservidor', function(req, res, next) {
 
     // Pimero recorro los servidores
     for (let i = 0; i< data.length;i++) {
-      
-        let obj = {}
 
-        obj.sesiones=data[i].sesiones
-        obj.serverName=data[i].Computadora
+      if (!data[i].Computadora) continue 
+      
+      let obj = {}
+
+      obj.sesiones=data[i].sesiones
+      obj.serverName=data[i].Computadora
         
-        resultado.push(obj)
+      resultado.push(obj)
     }
 
     res.json(resultado)

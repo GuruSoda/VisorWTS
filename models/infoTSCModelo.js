@@ -28,42 +28,43 @@ class infoTSCModelo {
         for (let i=0;i<ts.length;i++) {
             let obj= {}
 
+            that.infots[i] = {}
             await fetch('http://' + ts[i] + ':7319/wts/informacion')
                 .then(function(res) {
                   return res.json()  
                 })
                 .then(function(json) {
-                    json.ts = ts[i]
-                    that.infots.push(json)
-                    return that.infots
+                    that.infots[i] = json
                 }).catch(function(data){
-
+                    console.log('Error:' + data)
                 })
 
+            // si el atributo Computadora esta sin datos es por que fallo el anterior fetch
+            if (!that.infots[i].Computadora) continue
+
+            that.infots[i].ts = ts[i]
+
+            that.infots[i].sesiones = []
             await fetch('http://' + ts[i] + ':7319/wts/sesiones')
                 .then(function(res) {
                     return res.json()  
                 })
                 .then(function(json) {
                     that.infots[i].sesiones = json
-
-                    return that.infots
                 }).catch(function(data) {
-                    that.infots[i].sesiones = []
+                    console.log('Error:' + data)
                 })
 
+            that.infots[i].procesos = []
             await fetch('http://' + ts[i] + ':7319/wts/procesos')
                 .then(function(res) {
                     return res.json()  
                 })
                 .then(function(json) {
                     that.infots[i].procesos = json
-
-                    return that.infots
                 }).catch(function(data) {
-                    that.infots[i].procesos = []
+                    console.log('Error:' + data)
                 })
-
         }
 
         return this.infots
@@ -81,9 +82,9 @@ class infoTSCModelo {
 
             if ((that.ultimaCarga.getTime() + 30000) < ahora.getTime()) {
                 that.ultimaCarga = ahora
-                that.cargaCompleta().then(function(data){
-                    resolve(that.infots)
-                })
+//                that.cargaCompleta()
+
+                that.cargaCompleta().then(function(data) { resolve(that.infots) })
             } else {
                 resolve(that.infots)
             }
