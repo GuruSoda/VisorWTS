@@ -39,6 +39,7 @@
             <li><a class="sidenav-close" href="#/buscar"><i class="material-icons left">search</i>Buscar</a></li>
         </ul>
 
+        <div id="espera"></div>
         <div id="main"></div>
     </div>
     
@@ -70,7 +71,7 @@
             M.AutoInit();
 
             let elemssss = document.querySelectorAll('.collapsible .popout')
-            let instances = M.Collapsible.init(elemssss, {acordeon: false, onOpenStart: hola()})
+            let instances = M.Collapsible.init(elemssss, {acordeon: false})
 
            cargarServidores()
         })

@@ -27,7 +27,6 @@ router.get('/exportarusuarios', function(req, res, next) {
 
     tmp.file({prefix: 'infoWTS-'}, function _tempFileCreated(err, csvtemp, fd, cleanupCallback) {
 
-      console.log('Archivo Temporal:', csvtemp)
       try {
         fs.appendFileSync(csvtemp, 'Servidor;Usuario;Proceso\n');
       } catch (err) {
@@ -36,9 +35,12 @@ router.get('/exportarusuarios', function(req, res, next) {
 
       for (i=0;i<data.length;i++) {
         let servidor = data[i].Computadora
+
+        if (!data[i].sesiones) continue
         for (j=0;j<data[i].sesiones.length;j++) {
           let usuario = data[i].sesiones[j].username
 
+          if (!data[i].procesos) continue
           for (x=0;x<data[i].procesos.length;x++) {
             if (data[i].procesos[x].username.toUpperCase() === usuario.toUpperCase()) {
               let proceso = data[i].procesos[x].process

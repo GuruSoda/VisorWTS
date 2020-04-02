@@ -3,6 +3,21 @@ function hola() {
     console.log('Hola!')
 }
 
+function esperando() {
+    return `
+<div class="preloader-wrapper big active">
+  <div class="spinner-layer spinner-blue-only">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>`
+}
+
 async function resumen() {
     let data = await getJSON('/api/cargafull')
 
@@ -33,6 +48,9 @@ function tablaProcesosID(data) {
 }
 
 async function cargarUsuarios() {
+
+    document.getElementById('espera').innerHTML = esperando()
+
     let data = await getJSON('/api/usuariosxservidor')
 
     let items = "" 
@@ -65,8 +83,8 @@ async function cargarUsuarios() {
     });
 */
 
+    document.getElementById('espera').innerHTML = ''
     document.getElementById('listaUsuarios').innerHTML = items
-
 }
 
 function tablaUsuariosWinStationName(data) {
@@ -94,6 +112,9 @@ function tablaUsuariosWinStationName(data) {
 }
 
 async function cargarServidores() {
+
+    document.getElementById('espera').innerHTML = esperando()
+
     let data = await getJSON('/api/sesionesxservidor')
 
     let items = "" 
@@ -109,5 +130,6 @@ async function cargarServidores() {
     `
     }
 
+    document.getElementById('espera').innerHTML = ''
     document.getElementById('listaServidores').innerHTML = items
 }
