@@ -63,3 +63,5 @@ typings/
 # archivos de configuracion de Visual Studio Code
 .vscode
 
+# archivo de configuracion de la aplicacion, cambia dependiento el entorno
+configs/infoTSCConfig.json
