@@ -1,27 +1,29 @@
-// nada
-function hola() {
-    console.log('Hola!')
-}
+function esperando(encender) {
 
-function esperando() {
-    return `
-<div class="preloader-wrapper big active">
-  <div class="spinner-layer spinner-blue-only">
-    <div class="circle-clipper left">
-      <div class="circle"></div>
-    </div><div class="gap-patch">
-      <div class="circle"></div>
-    </div><div class="circle-clipper right">
-      <div class="circle"></div>
-    </div>
-  </div>
-</div>`
+    if (!encender) document.getElementById('espera').innerHTML = ''
+    else { 
+    let preloader = `
+            <div class="row center">
+            <div class="preloader-wrapper big active">
+                <div class="spinner-layer spinner-blue-only">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                    <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+                </div>
+            </div>
+            </div>
+            `
+            document.getElementById('espera').innerHTML = preloader
+        }
 }
 
 async function resumen() {
-    let data = await getJSON('/api/cargafull')
-
-    console.log(data)
+//  let data = await getJSON('/api/cargafull')
+//  console.log(data)
 }
 
 function tablaProcesosID(data) {
@@ -49,7 +51,7 @@ function tablaProcesosID(data) {
 
 async function cargarUsuarios() {
 
-    document.getElementById('espera').innerHTML = esperando()
+    esperando(true)
 
     let data = await getJSON('/api/usuariosxservidor')
 
@@ -83,7 +85,8 @@ async function cargarUsuarios() {
     });
 */
 
-    document.getElementById('espera').innerHTML = ''
+    esperando(false)
+    document.getElementById('botonExportar').style.visibility = 'visible'
     document.getElementById('listaUsuarios').innerHTML = items
 }
 
@@ -113,7 +116,7 @@ function tablaUsuariosWinStationName(data) {
 
 async function cargarServidores() {
 
-    document.getElementById('espera').innerHTML = esperando()
+    esperando(true)
 
     let data = await getJSON('/api/sesionesxservidor')
 
@@ -130,6 +133,6 @@ async function cargarServidores() {
     `
     }
 
-    document.getElementById('espera').innerHTML = ''
+    esperando(false)
     document.getElementById('listaServidores').innerHTML = items
 }

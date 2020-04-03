@@ -45,9 +45,12 @@ class infoTSCModelo {
             that.infots[i].ts = ts[i]
 
             that.infots[i].sesiones = []
+            
+//          await fetch('http://httpstat.us/404')
             await fetch('http://' + ts[i] + ':7319/wts/sesiones')
                 .then(function(res) {
-                    return res.json()  
+                    if (res.ok) return res.json()
+                    else return []
                 })
                 .then(function(json) {
                     that.infots[i].sesiones = json
