@@ -97,6 +97,7 @@ function tablaUsuariosWinStationName(data) {
             <thead>
                 <tr>
                     <th>Usuario</th>
+                    <th>Estado</th>
                     <th>WinStation</th>
                 </tr>
             </thead>
@@ -105,6 +106,7 @@ function tablaUsuariosWinStationName(data) {
     for (let j=0;j<data.length;j++) {
         html += `<tr>
                     <td>${data[j].username}</td>
+                    <td>${data[j].state}</td>
                     <td>${data[j].winstationname}</td>
                 </tr>`
         }
