@@ -15,8 +15,8 @@ function esperando(encender) {
                 </div>
                 </div>
             </div>
-            </div>
-            `
+            </div>`
+
             document.getElementById('espera').innerHTML = preloader
         }
 }
@@ -66,24 +66,6 @@ async function cargarUsuarios() {
             <div class="collapsible-body">${tablaProcesosID(data[i].procesos)}</div>
         </li>`
     }
-/*
-    let items = data.map(function(item) {
-        return `
-        <li>
-            <div class="collapsible-header">
-              <i class="material-icons">face</i>
-              ${item.userName}
-            <span class="new badge blue" data-badge-caption="${item.serverName}"></span></div>
-            <div class="collapsible-body"><p></p></div>
-        </li>`
-    })
-
-    let listaUsuario = document.getElementById('listaUsuarios')
-
-    items.forEach(element => {
-        listaUsuarios.appendChild(items)    
-    });
-*/
 
     esperando(false)
     document.getElementById('botonExportar').style.visibility = 'visible'
