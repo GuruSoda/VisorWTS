@@ -47,7 +47,7 @@ class infoTSCModelo {
     }
 
     async recolectar() {
-        console.log('Actualizando Servidores:' + this.servidores())
+//        console.log('Actualizando Servidores:' + this.servidores())
 
         let ts = this.servidores()
         let dataServidores = []
