@@ -38,7 +38,7 @@ async function resumen() {
     document.getElementById('valProcesos').innerText = data.procesos
     document.getElementById('valMemoria').innerText = readableBytes(data.totalMemoria)
     document.getElementById('valMemoriaUsada').innerText = readableBytes(data.usadaMemoria)
-    document.getElementById('valCarga').innerText = data.carga
+    document.getElementById('valCarga').innerText = data.carga + ' %'
 }
 
 function tablaProcesosID(data) {
