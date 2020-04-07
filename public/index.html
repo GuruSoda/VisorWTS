@@ -51,52 +51,54 @@
     <script type="text/javascript" src="js/index.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            M.AutoInit();
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
 
-            let elems = document.querySelectorAll('.sidenav')
-            let instancesaaa = M.Sidenav.init(elems, {draggable: false, edge: 'left'})
+        let elems = document.querySelectorAll('.sidenav')
+        let instancesaaa = M.Sidenav.init(elems, {draggable: false, edge: 'left'})
 
-    });
+        crossroads.addRoute('#/', function () {
+            load('main', 'partials/resumen.html', function () {
 
-    crossroads.addRoute('#/', function () {
-        load('main', 'partials/resumen.html')
-
-        resumen()
-    })
-
-    crossroads.addRoute('#/servidores', function () {
-        load('main', 'partials/servidores.html', function() {
-
-            M.AutoInit();
-
-            let elemssss = document.querySelectorAll('.collapsible .popout')
-            let instances = M.Collapsible.init(elemssss, {acordeon: false})
-
-           cargarServidores()
+                resumen()
+            })
         })
-    })
 
-    crossroads.addRoute('#/usuarios', function () {
-        load('main', 'partials/usuarios.html', function() {
+        crossroads.addRoute('#/servidores', function () {
+            load('main', 'partials/servidores.html', function() {
 
-            M.AutoInit();
+                M.AutoInit();
 
-            let elem = document.querySelectorAll('.collapsible .popout')
-            let instances = M.Collapsible.init(elem, {acordeon: false})
+                let elemssss = document.querySelectorAll('.collapsible .popout')
+                let instances = M.Collapsible.init(elemssss, {acordeon: false})
 
-            cargarUsuarios()
+            cargarServidores()
+            })
         })
+
+        crossroads.addRoute('#/usuarios', function () {
+            load('main', 'partials/usuarios.html', function() {
+
+                M.AutoInit();
+
+                let elem = document.querySelectorAll('.collapsible .popout')
+                let instances = M.Collapsible.init(elem, {acordeon: false})
+
+                cargarUsuarios()
+            })
+        })
+
+        crossroads.addRoute('#/buscar', function () {
+            load('main', 'partials/buscar.html')
+        })
+
+        // otra forma de escuchar cambios en el #
+        window.addEventListener('hashchange', function() { crossroads.parse(window.location.hash) })
+
+        crossroads.parse(window.location.hash)
+
+        location.replace('#/')
     })
-
-    crossroads.addRoute('#/buscar', function () {
-        load('main', 'partials/buscar.html')
-    })
-
-    // otra forma de escuchar cambios en el #
-    window.addEventListener('hashchange', function() { crossroads.parse(window.location.hash) })
-
-    crossroads.parse(window.location.hash)
 
     </script>
 </body>

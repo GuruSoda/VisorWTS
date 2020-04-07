@@ -231,6 +231,52 @@ class infoTSCModelo {
         })
     }
 
+    resumen() {
+        let that = this
+
+        return new Promise(function (resolve, reject) {
+            let resultado = {
+                servidores: 0,
+                sesiones: 0,
+                procesos: 0,
+                totalMemoria: 0,
+                usadaMemoria: 0,
+                carga: 0
+            }
+
+            if (that.infots) resultado.servidores = that.infots.length
+            else resolve(resultado)
+
+            // Pimero recorro los servidores
+            for (let i = 0; i< that.infots.length;i++) {
+
+                resultado.totalMemoria += that.infots[i].Memoria.TotalFisica
+                resultado.usadaMemoria += (that.infots[i].Memoria.TotalFisica - that.infots[i].Memoria.DisponibleFisica)
+                resultado.carga += that.infots[i].Memoria.Carga;
+
+                if (that.infots[i].sesiones) resultado.sesiones += that.infots[i].sesiones.length
+
+                if (!that.infots[i].sesiones) continue
+
+                // recorro las sesiones de cada servidor
+                for (let j = 0; j < that.infots[i].sesiones.length;j++) {
+
+                    if (!that.infots[i].procesos) continue
+
+                    for (let x=0;x<that.infots[i].procesos.length;x++) {
+                      if (that.infots[i].sesiones[j].username.toUpperCase() === that.infots[i].procesos[x].username.toUpperCase()) {
+                        resultado.procesos++
+                      }
+                    }
+                }
+            }
+
+            if (resultado.carga) resultado.carga = resultado.carga/that.infots.length
+
+            resolve(resultado)
+        })
+    }
+
     dataBase() {
         return this.infots
     }

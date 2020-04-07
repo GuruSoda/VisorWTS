@@ -44,4 +44,12 @@ router.get('/sesionesxservidor', function(req, res, next) {
   })
 })
 
+router.get('/resumen', function(req, res, next) {
+  agente.resumen().then(function(data) {
+     res.json(data)
+   }).catch(function(data) {
+    res.json({error: data})
+  })
+})
+
 module.exports = router

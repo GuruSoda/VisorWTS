@@ -1,3 +1,10 @@
+function readableBytes(bytes) {
+    var i = Math.floor(Math.log(bytes) / Math.log(1024)),
+    sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+    return (bytes / Math.pow(1024, i)).toFixed(2) * 1 + ' ' + sizes[i];
+}
+
 function esperando(encender) {
 
     if (!encender) document.getElementById('espera').innerHTML = ''
@@ -22,8 +29,16 @@ function esperando(encender) {
 }
 
 async function resumen() {
-//  let data = await getJSON('/api/cargafull')
-//  console.log(data)
+    let data = await getJSON('/api/resumen')
+
+    console.log(data)
+
+    document.getElementById('valServidores').innerText = data.servidores
+    document.getElementById('valSesiones').innerText = data.sesiones
+    document.getElementById('valProcesos').innerText = data.procesos
+    document.getElementById('valMemoria').innerText = readableBytes(data.totalMemoria)
+    document.getElementById('valMemoriaUsada').innerText = readableBytes(data.usadaMemoria)
+    document.getElementById('valCarga').innerText = data.carga
 }
 
 function tablaProcesosID(data) {
