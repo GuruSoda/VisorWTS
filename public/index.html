@@ -95,9 +95,9 @@
         // otra forma de escuchar cambios en el #
         window.addEventListener('hashchange', function() { crossroads.parse(window.location.hash) })
 
-        crossroads.parse(window.location.hash)
+        if (!window.location.hash) location.replace('#/')
 
-        location.replace('#/')
+        crossroads.parse(window.location.hash)
     })
 
     </script>

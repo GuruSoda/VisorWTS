@@ -1,9 +1,10 @@
 <div class="section">
     <div class="row">
+        <h3 class="grey-text">General</h3>
 
         <a href="#/servidores">
-            <div class="col s6 m3">
-                <div class="card horizontal blue-grey darken-1">
+            <div class="col s12 m4 l3">
+                <div class="card horizontal hoverable blue-grey darken-1">
                     <div class="card-image valign-wrapper">
                         <i class="material-icons medium white-text">storage</i>
                     </div>
@@ -15,9 +16,9 @@
             </div>
         </a>
 
-        <div class="col s6 m3">
+        <div class="col s12 m4 l3">
             <a href="#/usuarios">
-                <div class="card horizontal blue-grey darken-1">
+                <div class="card horizontal hoverable blue-grey darken-1">
                     <div class="card-image valign-wrapper">
                         <i class="material-icons medium white-text">face</i>
                     </div>
@@ -29,8 +30,8 @@
             </a>
         </div>
 
-        <div class="col s6 m3">
-            <div class="card horizontal blue-grey darken-1">
+        <div class="col s12 m4 l3">
+            <div class="card horizontal hoverable blue-grey darken-1">
                 <div class="card-image valign-wrapper">
                     <i class="material-icons medium white-text">apps</i>
                 </div>
@@ -41,8 +42,8 @@
             </div>
         </div>
 
-        <div class="col s6 m3">
-            <div class="card horizontal blue-grey darken-1">
+        <div class="col s12 m4 l3">
+            <div class="card horizontal hoverable blue-grey darken-1">
                 <div class="card-image valign-wrapper">
                     <i class="material-icons medium white-text">memory</i>
                 </div>
@@ -53,8 +54,8 @@
             </div>
         </div>
 
-        <div class="col s6 m3">
-            <div class="card horizontal blue-grey darken-1">
+        <div class="col s12 m4 l3">
+            <div class="card horizontal hoverable blue-grey darken-1">
                 <div class="card-image valign-wrapper">
                     <i class="material-icons medium white-text">developer_board</i>
                 </div>
@@ -65,8 +66,8 @@
             </div>
         </div>
 
-        <div class="col s6 m3">
-            <div class="card horizontal blue-grey darken-1">
+        <div class="col s12 m4 l3">
+            <div class="card horizontal hoverable blue-grey darken-1">
                 <div class="card-image valign-wrapper">
                     <i class="material-icons medium white-text">battery_std</i>
                 </div>
@@ -77,5 +78,35 @@
             </div>
         </div>
 
+    </div>
+</div>
+<div class="section">
+    <div class="row">
+        <h3 class="grey-text">Servidores</h3>
+        <div class="center">
+            <!--
+            <span class="new badge blue left" data-badge-caption="Memoria"></span>
+            <span class="new badge blue left" data-badge-caption="Memoria Usada"></span>
+            <span class="new badge blue left" data-badge-caption="Procesos"></span>
+            <span class="new badge blue left" data-badge-caption="Sesiones"></span>
+            <span class="new badge blue left" data-badge-caption="Carga"></span>
+            -->
+            <div class="chip red lighten-1 white-text">Memoria</div>
+            <div class="chip green lighten-0 white-text">Memoria Utilizada</div>
+            <div class="chip deep-orange lighten-1 white-text">Carga</div>
+            <div class="chip blue lighten-1 white-text">Sesiones</div>
+            <div class="chip purple lighten-2 white-text">Procesos</div>
+        </div>
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nombre</th>
+                    <th>Sistema Operativo</th>
+                    <th>Estado Actual</th>
+                </tr>
+            </thead>
+            <tbody id="listaServidoresResumen"></tbody>
+        </table>
     </div>
 </div>

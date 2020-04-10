@@ -277,6 +277,29 @@ class infoTSCModelo {
         })
     }
 
+    infoServidores() {
+        let that = this
+
+        return new Promise(function (resolve, reject) {
+            let resultado = []
+
+            resultado = that.infots.map(function(infoServidor) {
+                let obj = infoServidor
+
+                delete obj.Directorio_Actual
+                delete obj.Ejecutable
+                delete obj.Usuario
+
+                obj.sesiones = infoServidor.sesiones.length
+                obj.procesos = infoServidor.procesos.length
+
+                return obj
+            })
+
+            resolve(resultado)
+        })
+    }
+
     dataBase() {
         return this.infots
     }

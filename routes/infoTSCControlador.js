@@ -52,4 +52,12 @@ router.get('/resumen', function(req, res, next) {
   })
 })
 
+router.get('/infoservidores', function(req, res, next) {
+  agente.infoServidores().then(function(data) {
+     res.json(data)
+   }).catch(function(data) {
+    res.json({error: data})
+  })
+})
+
 module.exports = router
