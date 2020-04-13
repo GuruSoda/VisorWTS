@@ -16,6 +16,13 @@ function load(selector, url, cb) {
 }
 
 async function getJSON(url) {
-    const response = await fetch(url)
-    return response.json()
+    return fetch(url).then(function(data) {
+        return data.json()
+    }).then(function(json) {
+        console.log(url,':',json)
+        return json
+    }).catch(function(error) {
+        console.log('Error:', error)
+        return error.message
+    })
 }

@@ -51,26 +51,30 @@ function registroServidorResumen(dataServidor) {
     </tr>`
 }
 
-async function resumen() {
-    let data = await getJSON('/api/resumen')
+function resumen() {
+    getJSON('/api/resumen').then(function(data) {
 
-//    console.log(data)
+//        console.log('data:', data)
 
-    document.getElementById('valServidores').innerText = data.servidores ? data.servidores : -1
-    document.getElementById('valSesiones').innerText = data.sesiones ? data.sesiones : -1
-    document.getElementById('valProcesos').innerText = data.procesos ? data.procesos : -1
-    document.getElementById('valMemoria').innerText = data.totalMemoria ? readableBytes(data.totalMemoria) : -1
-    document.getElementById('valMemoriaUsada').innerText = data.usadaMemoria ? readableBytes(data.usadaMemoria) : -1
-    document.getElementById('valCarga').innerText = data.carga ? data.carga.toFixed(2) + ' %' : -1 
+        document.getElementById('valServidores').innerText = data.servidores ? data.servidores : -1
+        document.getElementById('valSesiones').innerText = data.sesiones ? data.sesiones : -1
+        document.getElementById('valProcesos').innerText = data.procesos ? data.procesos : -1
+        document.getElementById('valMemoria').innerText = data.totalMemoria ? readableBytes(data.totalMemoria) : -1
+        document.getElementById('valMemoriaUsada').innerText = data.usadaMemoria ? readableBytes(data.usadaMemoria) : -1
+        document.getElementById('valCarga').innerText = data.carga ? data.carga.toFixed(2) + ' %' : -1 
 
-    data = await getJSON('/api/infoservidores')
+        getJSON('/api/infoservidores').then(function(data) {
+            let registros = ""
+            for(let i=0;i<data.length;i++) {
+                registros += registroServidorResumen(data[i])
+            }
+        
+            document.getElementById('listaServidoresResumen').innerHTML = registros 
+        })
+    }).catch(function(error) {
+        console.log(error)
+    })
 
-    let registros = ""
-    for(let i=0;i<data.length;i++) {
-        registros += registroServidorResumen(data[i])
-    }
-
-    document.getElementById('listaServidoresResumen').innerHTML = registros 
 }
 
 function tablaProcesosID(data) {
@@ -103,23 +107,25 @@ async function cargarUsuarios() {
 
     esperando(true)
 
-    let data = await getJSON('/api/usuariosxservidor')
-
-    let items = "" 
-    for (let i=0;i<data.length;i++) {
-        items += `
-        <li>
-            <div class="collapsible-header">
-              <i class="material-icons">face</i>
-              ${data[i].userName}
-            <span class="new badge blue" data-badge-caption="${data[i].serverName}"></span></div>
-            <div class="collapsible-body">${tablaProcesosID(data[i].procesos)}</div>
-        </li>`
-    }
-
-    esperando(false)
-    document.getElementById('botonExportar').style.visibility = 'visible'
-    document.getElementById('listaUsuarios').innerHTML = items
+    getJSON('/api/usuariosxservidor').then(function(data){
+        let items = "" 
+        for (let i=0;i<data.length;i++) {
+            items += `
+            <li>
+                <div class="collapsible-header">
+                  <i class="material-icons">face</i>
+                  ${data[i].userName}
+                <span class="new badge blue" data-badge-caption="${data[i].serverName}"></span></div>
+                <div class="collapsible-body">${tablaProcesosID(data[i].procesos)}</div>
+            </li>`
+        }
+    
+        esperando(false)
+        document.getElementById('botonExportar').style.visibility = 'visible'
+        document.getElementById('listaUsuarios').innerHTML = items
+    }).catch(function(error) {
+        console.log(error)
+    })
 }
 
 function tablaUsuariosWinStationName(data) {
@@ -154,22 +160,26 @@ async function cargarServidores() {
 
     esperando(true)
 
-    let data = await getJSON('/api/sesionesxservidor')
+    getJSON('/api/sesionesxservidor').then(function(data) {
+        let items = "" 
+        for (let i=0;i<data.length;i++) {
+            items += `
+            <li>
+                <div class="collapsible-header">
+                    <i class="material-icons">computer</i>
+                    ${data[i].serverName}
+                    <span class="new badge blue" data-badge-caption="Sesiones">${data[i].sesiones.length}</span>
+                </div>
+    
+                <div class="collapsible-body">${tablaUsuariosWinStationName(data[i].sesiones)}</div>
+            </li>`
+        }
 
-    let items = "" 
-    for (let i=0;i<data.length;i++) {
-        items += `
-        <li>
-            <div class="collapsible-header">
-                <i class="material-icons">computer</i>
-                ${data[i].serverName}
-                <span class="new badge blue" data-badge-caption="Sesiones">${data[i].sesiones.length}</span>
-            </div>
-
-            <div class="collapsible-body">${tablaUsuariosWinStationName(data[i].sesiones)}</div>
-        </li>`
-    }
-
-    esperando(false)
-    document.getElementById('listaServidores').innerHTML = items
+        document.getElementById('listaServidores').innerHTML = items
+        
+    }).catch(function(error) {
+        console.log(error)
+    }).finally(function(data) {
+        esperando(false)
+    })    
 }

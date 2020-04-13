@@ -2,7 +2,6 @@ const express = require('express')
 const router = express.Router()
 const wts = require('../models/infoTSCModelo.js')
 const fs = require('fs')
-const tmp = require('tmp')
 
 agente = new wts()
 
@@ -18,12 +17,19 @@ router.get('/cargafull', function(req, res, next) {
   })
 })
 
+router.get('/database', function(req, res, next) {
+  agente.dataBasePromises().then(data => {
+    res.json(data)
+  })
+})
+
 router.get('/exportarusuarios', function(req, res, next) {
-  agente.info().then(function(archivo) {
+  agente.exportarusuarios().then(archivo => {
     res.download(archivo, 'estadoUsuarios.csv', function() {
-      cleanupCallback()
+      fs.unlinkSync(archivo)
     })
-  }).catch(function(error) {
+  }).catch(error => {
+    console.log('error:', error)
     res.send(error)
   })
 })
@@ -53,7 +59,7 @@ router.get('/resumen', function(req, res, next) {
 })
 
 router.get('/infoservidores', function(req, res, next) {
-  agente.infoServidores().then(function(data) {
+  agente.infoServidores().then( data => {
      res.json(data)
    }).catch(function(data) {
     res.json({error: data})
