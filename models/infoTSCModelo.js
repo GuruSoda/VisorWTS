@@ -162,6 +162,12 @@ class infoTSCModelo {
                 resultado.push(obj)
             }
 
+            resultado.sort(function(a, b) {
+                if (a.serverName.toUpperCase() > b.serverName.toUpperCase()) return 1
+                else if (a.serverName.toUpperCase() < b.serverName.toUpperCase()) return -1
+                else return 0
+            })
+
             resolve(resultado)
         })
     }
@@ -195,6 +201,12 @@ class infoTSCModelo {
                 resultado.push(obj)
               }
             }
+
+            resultado.sort(function (a, b) {
+                if (a.userName.toUpperCase() > b.userName.toUpperCase()) return 1
+                else if (a.userName.toUpperCase() < b.userName.toUpperCase()) return -1
+                else return 0
+            })
 
             resolve(resultado)
         })
