@@ -65,3 +65,9 @@ typings/
 
 # archivo de configuracion de la aplicacion, cambia dependiento el entorno
 configs/infoTSCConfig.json
+
+# directorio del node.exe
+node/
+
+# directorio donde queda el servicio
+daemon/
