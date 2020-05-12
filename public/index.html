@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
 
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
@@ -44,62 +44,10 @@
     </div>
     
     <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="js/polyfill.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/signals.js"></script>
-    <script type="text/javascript" src="js/crossroads.js"></script>
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        M.AutoInit();
-
-        let elems = document.querySelectorAll('.sidenav')
-        let instancesaaa = M.Sidenav.init(elems, {draggable: false, edge: 'left'})
-
-        crossroads.addRoute('#/', function () {
-            load('main', 'partials/resumen.html', function () {
-
-                resumen()
-            })
-        })
-
-        crossroads.addRoute('#/servidores', function () {
-            load('main', 'partials/servidores.html', function() {
-
-                M.AutoInit();
-
-                let elemssss = document.querySelectorAll('.collapsible .popout')
-                let instances = M.Collapsible.init(elemssss, {acordeon: false})
-
-            cargarServidores()
-            })
-        })
-
-        crossroads.addRoute('#/usuarios', function () {
-            load('main', 'partials/usuarios.html', function() {
-
-                M.AutoInit();
-
-                let elem = document.querySelectorAll('.collapsible .popout')
-                let instances = M.Collapsible.init(elem, {acordeon: false})
-
-                cargarUsuarios()
-            })
-        })
-
-        crossroads.addRoute('#/buscar', function () {
-            load('main', 'partials/buscar.html')
-        })
-
-        // otra forma de escuchar cambios en el #
-        window.addEventListener('hashchange', function() { crossroads.parse(window.location.hash) })
-
-        if (!window.location.hash) location.replace('#/')
-
-        crossroads.parse(window.location.hash)
-    })
-
-    </script>
+    <script type="text/javascript" src="js/signals.min.js"></script>
+    <script type="text/javascript" src="js/crossroads.min.js"></script>
+    <script type="text/javascript" src="js/index-compiled.js"></script>
 </body>
 </html>

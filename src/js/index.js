@@ -7,24 +7,25 @@ function readableBytes(bytes) {
 
 function esperando(encender) {
 
-    if (!encender) document.getElementById('espera').innerHTML = ''
+    if (!encender) 
+        document.getElementById('espera').innerHTML = ''
     else { 
-    let preloader = `
-            <div class="row center">
-                <div class="preloader-wrapper big active">
-                    <div class="spinner-layer spinner-blue-only">
-                    <div class="circle-clipper left">
-                        <div class="circle"></div>
-                    </div><div class="gap-patch">
-                        <div class="circle"></div>
-                    </div><div class="circle-clipper right">
-                        <div class="circle"></div>
+        let preloader = `
+                <div class="row center">
+                    <div class="preloader-wrapper big active">
+                        <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                        </div>
                     </div>
-                    </div>
-                </div>
-            </div>`
+                </div>`
 
-            document.getElementById('espera').innerHTML = preloader
+                document.getElementById('espera').innerHTML = preloader
         }
 }
 
@@ -52,34 +53,29 @@ function registroServidorResumen(dataServidor) {
 }
 
 function resumen() {
-    getJSON('/api/resumen').then(function(data) {
-
-//        console.log('data:', data)
-
+    getJSON('/api/resumen', function (data) {
+        //        console.log('data:', data)
         document.getElementById('valServidores').innerText = data.servidores ? data.servidores : -1
         document.getElementById('valSesiones').innerText = data.sesiones ? data.sesiones : -1
         document.getElementById('valProcesos').innerText = data.procesos ? data.procesos : -1
         document.getElementById('valMemoria').innerText = data.totalMemoria ? readableBytes(data.totalMemoria) : -1
         document.getElementById('valMemoriaUsada').innerText = data.usadaMemoria ? readableBytes(data.usadaMemoria) : -1
         document.getElementById('valCarga').innerText = data.carga ? data.carga.toFixed(2) + ' %' : -1 
+        
+        getJSON('/api/infoservidores', function(data) {
 
-        getJSON('/api/infoservidores').then(function(data) {
             let registros = ""
             for(let i=0;i<data.length;i++) {
                 registros += registroServidorResumen(data[i])
             }
-        
+            
             document.getElementById('listaServidoresResumen').innerHTML = registros 
         })
-    }).catch(function(error) {
-        console.log(error)
     })
-
 }
 
 function tablaProcesosID(data) {
     let html = `
-    
         <table class="highlight">
             <thead>
                     <tr>
@@ -103,28 +99,28 @@ function tablaProcesosID(data) {
     return html
 }
 
-async function cargarUsuarios() {
+function cargarUsuarios() {
 
     esperando(true)
 
-    getJSON('/api/usuariosxservidor').then(function(data){
+    getJSON('/api/usuariosxservidor', function(data) {
+
         let items = "" 
         for (let i=0;i<data.length;i++) {
             items += `
             <li>
                 <div class="collapsible-header">
-                  <i class="material-icons">face</i>
-                  ${data[i].userName}
-                <span class="new badge blue" data-badge-caption="${data[i].serverName}"></span></div>
+                    <i class="material-icons">face</i>
+                    ${data[i].userName}
+                    <span class="new badge blue" data-badge-caption="${data[i].serverName}"></span>
+                </div>
                 <div class="collapsible-body">${tablaProcesosID(data[i].procesos)}</div>
             </li>`
         }
-    
+        
         esperando(false)
         document.getElementById('botonExportar').style.visibility = 'visible'
         document.getElementById('listaUsuarios').innerHTML = items
-    }).catch(function(error) {
-        console.log(error)
     })
 }
 
@@ -156,11 +152,12 @@ function tablaUsuariosWinStationName(data) {
     return html
 }
 
-async function cargarServidores() {
+function cargarServidores() {
 
     esperando(true)
 
-    getJSON('/api/sesionesxservidor').then(function(data) {
+    getJSON('/api/sesionesxservidor', function(data) {
+
         let items = "" 
         for (let i=0;i<data.length;i++) {
             items += `
@@ -176,10 +173,6 @@ async function cargarServidores() {
         }
 
         document.getElementById('listaServidores').innerHTML = items
-        
-    }).catch(function(error) {
-        console.log(error)
-    }).finally(function(data) {
         esperando(false)
-    })    
+    })
 }

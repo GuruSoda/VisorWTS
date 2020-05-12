@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Farsan&family=Kite+One&display=swap');
+
+$green: #8FDA25;
+$blue: #258FDA;
+
+body {
+  background-color: #000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Farsan, Helvetica;
+}
+
+#frame {
+  padding: 50px;
+  border: 5px solid lighten($blue, 30%);
+  border-radius: 15px;
+  color: #fff;
+  transform: skewX(-6deg);
+  animation: frame 3s linear infinite;
+}
+
+#text {
+  text-align: center;
+  font-size: 140px;
+  font-weight: 300;
+  letter-spacing: 15px;
+  color: lighten($green, 30%);
+  animation: text 3s linear infinite;
+}
+
+@keyframes text {
+  0%, 21.5%, 22%, 23.5%, 24%, 66.5%, 67%, 84.5%, 85%, 100% {
+    text-shadow: 0 0 30px $green;
+  }
+  21.8%, 23.8%, 66.8%, 84.8% {
+    text-shadow: none;
+  }
+}
+
+@keyframes frame {
+  0%, 21.5%, 22%, 23.5%, 24%, 66.5%, 67%, 84.5%, 85%, 100% {
+    box-shadow: 0 0 60px $blue, 0 0 50px $blue inset;
+  }
+  21.8%, 23.8%, 66.8%, 84.8% {
+    box-shadow: none;
+  }
+}

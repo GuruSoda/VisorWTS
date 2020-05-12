@@ -3,10 +3,17 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "babel": "npx babel src/js/ --out-file public/js/index-compiled.js --source-maps --minified --compact true --verbose",
+    "babel-watch": "npx babel --watch src/js/ --out-file public/js/index-compiled.js --source-maps --minified --compact true --verbose",
     "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development FALSABASE=tests/datosdatabasedebug.json nodemon index.js",
+    "dev": "NODE_ENV=development FALSABASE=tests/datosdatabasedebug.json nodemon -V --ignore src/js/ index.js",
     "start-win": "set NODE_ENV=production && node index.js",
-    "dev-win": "set NODE_ENV=development && nodemon index.js"
+    "dev-win": "set NODE_ENV=development && nodemon -V index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public/js/index-compiled.js"
+    ]
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,8 +25,18 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
-    "node-windows": "^1.0.0-beta.1",
-    "nodemon": "^2.0.2",
     "tmp": "^0.1.0"
+  },
+  "optionalDependencies": {
+    "node-windows": "^1.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-regenerator": "^7.8.7",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-preset-minify": "^0.5.1",
+    "nodemon": "^2.0.2"
   }
 }

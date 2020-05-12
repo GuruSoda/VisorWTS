@@ -71,3 +71,6 @@ node/
 
 # directorio donde queda el servicio
 daemon/
+
+# directorio cache para el sass ( para mi no sirve )
+.sass-cache/
